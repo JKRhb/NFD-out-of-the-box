@@ -214,12 +214,8 @@ EthernetTransport::receivePayload(span<const uint8_t> payload, const ethernet::A
   }
   m_hasRecentlyReceived = true;
 
-  static_assert(sizeof(EndpointId) >= ethernet::ADDR_LEN, "EndpointId is too small");
-  EndpointId endpoint = 0;
-  if (m_destAddress.isMulticast()) {
-    std::memcpy(&endpoint, sender.data(), sender.size());
-  }
-
+  EndpointId endpoint;
+  endpoint = (m_destAddress.isMulticast() == true) ? sender : endpoint;
   this->receive(element, endpoint);
 }
 

@@ -115,16 +115,16 @@ BOOST_AUTO_TEST_CASE_TEMPLATE(FaceScopePolicy, T, FaceScopePolicyTests)
                                       ndn::nfd::FACE_SCOPE_LOCAL);
   faceTable.add(face1);
 
-  auto data1 = makeData("/unsolicited-from-local");
-  forwarder.onIncomingData(*data1, FaceEndpoint(*face1, 0));
+  shared_ptr<Data> data1 = makeData("/unsolicited-from-local");
+  forwarder.onIncomingData(FaceEndpoint(*face1), *data1);
   BOOST_CHECK_EQUAL(isInCs(*data1), T::ShouldAdmitLocal::value);
 
   auto face2 = make_shared<DummyFace>("dummy://", "dummy://",
                                       ndn::nfd::FACE_SCOPE_NON_LOCAL);
   faceTable.add(face2);
 
-  auto data2 = makeData("/unsolicited-from-non-local");
-  forwarder.onIncomingData(*data2, FaceEndpoint(*face2, 0));
+  shared_ptr<Data> data2 = makeData("/unsolicited-from-non-local");
+  forwarder.onIncomingData(FaceEndpoint(*face2), *data2);
   BOOST_CHECK_EQUAL(isInCs(*data2), T::ShouldAdmitNonLocal::value);
 }
 

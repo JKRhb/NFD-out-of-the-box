@@ -82,8 +82,7 @@ BOOST_FIXTURE_TEST_CASE_TEMPLATE(ReceiveNormal, T, DatagramTransportFixtures, T)
   BOOST_REQUIRE_EQUAL(this->receivedPackets->size(), 2);
   BOOST_CHECK(this->receivedPackets->at(0).packet == pkt1);
   BOOST_CHECK(this->receivedPackets->at(1).packet == pkt2);
-  BOOST_CHECK_EQUAL(this->receivedPackets->at(0).endpoint,
-                    this->receivedPackets->at(1).endpoint);
+  BOOST_CHECK(this->receivedPackets->at(0).endpoint == this->receivedPackets->at(1).endpoint);
 }
 
 BOOST_FIXTURE_TEST_CASE_TEMPLATE(ReceiveIncomplete, T, DatagramTransportFixtures, T)

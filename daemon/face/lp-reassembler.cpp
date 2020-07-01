@@ -41,7 +41,7 @@ LpReassembler::LpReassembler(const LpReassembler::Options& options, const LinkSe
 }
 
 std::tuple<bool, Block, lp::Packet>
-LpReassembler::receiveFragment(EndpointId remoteEndpoint, const lp::Packet& packet)
+LpReassembler::receiveFragment(const lp::Packet& packet, const EndpointId& remoteEndpoint)
 {
   BOOST_ASSERT(packet.has<lp::FragmentField>());
 

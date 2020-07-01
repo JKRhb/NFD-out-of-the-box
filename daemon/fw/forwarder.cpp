@@ -219,9 +219,11 @@ Forwarder::onContentStoreMiss(const Interest& interest, const FaceEndpoint& ingr
     return;
   }
 
-  // dispatch to strategy: after receive Interest
-  m_strategyChoice.findEffectiveStrategy(*pitEntry)
-    .afterReceiveInterest(interest, FaceEndpoint(ingress.face, 0), pitEntry);
+  // dispatch to strategy: after incoming Interest
+  this->dispatchToStrategy(*pitEntry,
+    [&] (fw::Strategy& strategy) {
+      strategy.afterReceiveInterest(ingress, interest, pitEntry);
+    });
 }
 
 void
