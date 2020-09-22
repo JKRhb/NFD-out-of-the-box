@@ -371,6 +371,12 @@ protected: // accessors
     return m_forwarder.m_faceTable;
   }
 
+  void
+  addFace(const shared_ptr<nfd::Face>& face)
+  {
+    m_forwarder.m_faceTable.add(face);
+  }
+
 protected: // instance name
   struct ParsedInstanceName
   {
