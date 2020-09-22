@@ -80,6 +80,15 @@ public:
     return m_size;
   }
 
+  void
+  connect(const EndpointId&,
+          const FaceParams&,
+          const FaceCreatedCallback&,
+          const FaceCreationFailedCallback&,
+          time::nanoseconds) override
+  {
+  }
+
   /**
    * \brief Start listening
    *
