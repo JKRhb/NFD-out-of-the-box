@@ -288,7 +288,7 @@ SelfLearningStrategy::allNexthopTriedHandler(const FaceEndpoint& ingress, const 
     NFD_LOG_DEBUG(interest << " from=" << ingress << " retransmitNoNextHop");
   }
   else {
-    this->sendInterest(pitEntry, it->getFace(), interest);
+    this->sendInterest(interest, it->getFace(), pitEntry);
     NFD_LOG_DEBUG(interest << " from=" << ingress << " retransmit-retry-to Face=" << it->getFace().getId());
   }
 }
