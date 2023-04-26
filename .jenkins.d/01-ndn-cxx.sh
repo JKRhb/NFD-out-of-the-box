@@ -18,7 +18,8 @@ if [[ -z $INSTALLED_VERSION ]]; then
 fi
 
 sudo rm -rf ndn-cxx-latest
-git clone --depth 1 https://github.com/named-data/ndn-cxx.git ndn-cxx-latest
+git clone https://github.com/named-data/ndn-cxx.git ndn-cxx-latest
+git -C ndn-cxx-latest checkout fbea4fc83da1c3450ccbb5f0e3e2d5fbf9605961
 LATEST_VERSION=$(git -C ndn-cxx-latest rev-parse HEAD 2>/dev/null || echo UNKNOWN)
 
 if [[ $INSTALLED_VERSION != $LATEST_VERSION ]]; then
