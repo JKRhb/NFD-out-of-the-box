@@ -220,7 +220,7 @@ SelfLearningStrategy::afterReceiveNack(const lp::Nack& nack, const FaceEndpoint&
             broadcastInterest(interest, pitEntry->in_begin()->getFace(), pitEntry);
           }
           else {
-            this->processNack(ingress.face, nack, pitEntry);
+            this->processNack(nack, ingress.face, pitEntry);
           }
         }
         else {
@@ -232,7 +232,7 @@ SelfLearningStrategy::afterReceiveNack(const lp::Nack& nack, const FaceEndpoint&
       }
     }
   }
-  this->processNack(ingress.face, nack, pitEntry);
+  this->processNack(nack, ingress.face, pitEntry);
 }
 
 void
@@ -268,7 +268,7 @@ SelfLearningStrategy::noNexthopHandler(const FaceEndpoint& ingress, const Intere
     NFD_LOG_DEBUG("NACK non-discovery Interest=" << interest << " from=" << ingress << " noNextHop");
     lp::NackHeader nackHeader;
     nackHeader.setReason(lp::NackReason::NO_ROUTE);
-    this->sendNack(pitEntry, ingress.face, nackHeader);
+    this->sendNack(ngress.face, nackHeader, pitEntry);
     this->rejectPendingInterest(pitEntry);
     return;
   }
