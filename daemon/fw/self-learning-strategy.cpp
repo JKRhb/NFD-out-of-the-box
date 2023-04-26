@@ -268,7 +268,7 @@ SelfLearningStrategy::noNexthopHandler(const FaceEndpoint& ingress, const Intere
     NFD_LOG_DEBUG("NACK non-discovery Interest=" << interest << " from=" << ingress << " noNextHop");
     lp::NackHeader nackHeader;
     nackHeader.setReason(lp::NackReason::NO_ROUTE);
-    this->sendNack(ngress.face, nackHeader, pitEntry);
+    this->sendNack(ingress.face, nackHeader, pitEntry);
     this->rejectPendingInterest(pitEntry);
     return;
   }
