@@ -131,7 +131,7 @@ SelfLearningStrategy::afterContentStoreHit(const Data& data, const FaceEndpoint&
     auto paTag = data.getTag<lp::PrefixAnnouncementTag>();
     if (not isNonDiscovery && not paTag) {
       NFD_LOG_DEBUG("find pa");
-      sendData(pitEntry, data, ingress.face);
+      sendData(data, ingress.face, pitEntry);
     }
     else {
       NFD_LOG_DEBUG("no need to find pa");
@@ -303,7 +303,7 @@ SelfLearningStrategy::hasUntriedNexthopHandler(const FaceEndpoint& ingress, Face
   if (!isNonDiscovery) {
     interest.setTag(make_shared<lp::NonDiscoveryTag>(lp::EmptyValue{}));
   }
-  this->sendInterest(pitEntry, outFace, interest);
+  this->sendInterest(interest, outFace, pitEntry);
   pitEntry->getOutRecord(outFace)->insertStrategyInfo<OutRecordInfo>().first->isNonDiscoveryInterest = true;
   NFD_LOG_DEBUG("Send Interest " << interest << " to the untried Face=" << outFace.getId());
 }
