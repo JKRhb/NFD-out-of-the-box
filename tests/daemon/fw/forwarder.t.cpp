@@ -268,7 +268,7 @@ BOOST_AUTO_TEST_CASE(HopLimit)
 BOOST_AUTO_TEST_CASE(AddDefaultHopLimit)
 {
   auto face = addFace();
-  auto faceEndpoint = FaceEndpoint(*face, 0);
+  auto faceEndpoint = FaceEndpoint(*face);
   Pit& pit = forwarder.getPit();
   auto i1 = makeInterest("/A");
   auto pitA = pit.insert(*i1).first;
