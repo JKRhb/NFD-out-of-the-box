@@ -90,12 +90,12 @@ public: // triggers
                        const shared_ptr<pit::Entry>& pitEntry) override;
 
   void
-  afterContentStoreHit(const shared_ptr<pit::Entry>& pitEntry,
-                       const FaceEndpoint& ingress, const Data& data) override;
+  afterContentStoreHit(const Data& data, const FaceEndpoint& ingress,
+                       const shared_ptr<pit::Entry>& pitEntry) override;
 
   void
-  afterReceiveData(const shared_ptr<pit::Entry>& pitEntry,
-                   const FaceEndpoint& ingress, const Data& data) override;
+  afterReceiveData(const Data& data, const FaceEndpoint& ingress,
+                   const shared_ptr<pit::Entry>& pitEntry) override;
 
   void
   afterReceiveNack(const lp::Nack& nack, const FaceEndpoint& ingress,

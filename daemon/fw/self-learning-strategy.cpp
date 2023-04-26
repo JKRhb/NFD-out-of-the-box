@@ -117,13 +117,13 @@ SelfLearningStrategy::afterReceiveInterest(const Interest& interest, const FaceE
 }
 
 void
-SelfLearningStrategy::afterContentStoreHit(const shared_ptr<pit::Entry>& pitEntry,
-                                           const FaceEndpoint& ingress, const Data& data)
+SelfLearningStrategy::afterContentStoreHit(const Data& data, const FaceEndpoint& ingress, 
+                                           const shared_ptr<pit::Entry>& pitEntry)
 {
   NFD_LOG_DEBUG("after cs hit");
   if (ingress.face.getScope() == ndn::nfd::FACE_SCOPE_LOCAL) {
     NFD_LOG_DEBUG("this is consumer");
-    Strategy::afterContentStoreHit(pitEntry, ingress, data);
+    Strategy::afterContentStoreHit(data, ingress, pitEntry);
   }
   else {
     // if interest is discovery Interest, and data does not contain a PA, attach a PA to it
@@ -135,14 +135,14 @@ SelfLearningStrategy::afterContentStoreHit(const shared_ptr<pit::Entry>& pitEntr
     }
     else {
       NFD_LOG_DEBUG("no need to find pa");
-      Strategy::afterContentStoreHit(pitEntry, ingress, data);
+      Strategy::afterContentStoreHit(data, ingress, pitEntry);
     }
   }
 }
 
 void
-SelfLearningStrategy::afterReceiveData(const shared_ptr<pit::Entry>& pitEntry,
-                                       const FaceEndpoint& ingress, const Data& data)
+SelfLearningStrategy::afterReceiveData(const Data& data, const FaceEndpoint& ingress, 
+                                       const shared_ptr<pit::Entry>& pitEntry)
 {
   auto outRecord = pitEntry->getOutRecord(ingress.face);
   if (outRecord == pitEntry->out_end()) {
